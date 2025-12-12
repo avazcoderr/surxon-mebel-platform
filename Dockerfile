@@ -29,6 +29,9 @@ RUN chmod +x ./docker/entrypoint.sh
 # Copy project
 COPY . .
 
+# Set work directory to the backend folder
+WORKDIR /app/surxon_backend
+
 # Create staticfiles directory
 RUN mkdir -p staticfiles
 

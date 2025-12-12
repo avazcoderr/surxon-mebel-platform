@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Railway deployment script
 
-cd surxon_backend
+cd ..
 
 # Run migrations
 python manage.py migrate --noinput

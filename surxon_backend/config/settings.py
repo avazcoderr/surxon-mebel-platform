@@ -218,3 +218,18 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_OBTAIN_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer',
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
+
+
+# Production CSRF / secure settings
+# Use a comma-separated env var or hardcode the single origin (include https://)
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://surxon-mebel-platform-production.up.railway.app"
+    ).split(",")
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+else:
+    # for local development you can still set a local trusted origin if needed
+    CSRF_TRUSTED_ORIGINS = []

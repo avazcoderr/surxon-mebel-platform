@@ -1,0 +1,9 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.log
+local_settings.py
+venv/
+staticfiles/
+.env

@@ -3,8 +3,6 @@ services:
     build: .
     ports:
       - "8000:8000"
-    volumes:
-      - ./surxon_backend:/app
     environment:
       - DEBUG=1
       - DJANGO_SETTINGS_MODULE=config.settings

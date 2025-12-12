@@ -17,8 +17,17 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import health_check
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include('apps.authentication.urls')),
+    path("health/", health_check, name="health_check"),
 ]
+
+# Serve static and media files in development and production
+if settings.DEBUG or True:  # Always serve for Railway deployment
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

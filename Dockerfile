@@ -32,9 +32,9 @@ COPY . .
 # Set work directory to the backend folder
 WORKDIR /app/surxon_backend
 
-# Create staticfiles directory
-RUN mkdir -p /app/surxon_backend/static
+# Create staticfiles and media directories
 RUN mkdir -p /app/surxon_backend/staticfiles
+RUN mkdir -p /app/surxon_backend/media
 
 # Expose port (Railway will use PORT environment variable)
 EXPOSE 8000

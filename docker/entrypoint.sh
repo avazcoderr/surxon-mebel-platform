@@ -2,10 +2,10 @@
 # Entrypoint script for Railway deployment
 
 # Run migrations
-python manage.py migrate --noinput
+python /app/surxon_backend/manage.py migrate --noinput
 
 # Collect static files
-python manage.py collectstatic --noinput
+python /app/surxon_backend/manage.py collectstatic --noinput
 
 # Start the application
-exec python manage.py runserver 0.0.0.0:$PORT
+exec python /app/surxon_backend/manage.py runserver 0.0.0.0:$PORT

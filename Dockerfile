@@ -39,4 +39,4 @@ RUN mkdir -p staticfiles
 EXPOSE 8000
 
 # Use entrypoint script for Railway
-CMD ["./docker/entrypoint.sh"]
+CMD ["./app/docker/entrypoint.sh"]

@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*  # Remove apt lists immediately to keep this layer clean
 
 # Install Python dependencies
-COPY ./requirements.txt .
+COPY ./surxon_backend/requirements.txt .
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1

@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # Entrypoint script for Railway deployment
 
+# Change to backend directory
+cd /app/surxon_backend
+
 # Run migrations
-python /app/surxon_backend/manage.py migrate --noinput
+python manage.py migrate --noinput
 
 # Collect static files
-python /app/surxon_backend/manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 # Start the application
-exec python /app/surxon_backend/manage.py runserver 0.0.0.0:$PORT
+exec python manage.py runserver 0.0.0.0:$PORT

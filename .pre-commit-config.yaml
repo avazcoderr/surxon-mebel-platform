@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: main
+    rev: v0.14.9
     hooks:
       - id: ruff
         args: ["--fix", "--ignore=F401"]

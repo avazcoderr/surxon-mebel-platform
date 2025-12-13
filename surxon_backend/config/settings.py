@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-_*xrk#nxe*$z7j73po8o6x&h!%s3bb_as%rf#bok-qmkl_s8qe")
+SECRET_KEY = os.environ.get('SECRET_KEY', "key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ['*'] if DEBUG else [
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -45,6 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
+    # Local apps that provide the AUTH_USER_MODEL must come first
+    "apps.authentication", 
+    
     # Third party apps
     "drf_yasg",
     "corsheaders",
@@ -52,8 +54,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     
-    # Local apps
-    "apps.authentication",
+    # Other local apps
     "apps.products",
 ]
 
@@ -70,6 +71,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "config.urls"
+
+# Custom User Model
+AUTH_USER_MODEL = 'authentication.CustomUser'
 
 TEMPLATES = [
     {
@@ -94,8 +98,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 
@@ -156,11 +164,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-# Custom User Model
-AUTH_USER_MODEL = 'authentication.CustomUser'
-
 
 # Django REST Framework
 REST_FRAMEWORK = {

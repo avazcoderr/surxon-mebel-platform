@@ -49,7 +49,17 @@ class Product(AbstractBaseModel):
         related_name="products",
         help_text="Must be a child category (not a parent category)"
     )
-    
+
+    # Brand association
+    brand = models.ForeignKey(
+        "brands.Brand",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="products",
+        help_text="Optional link to the product's brand"
+    )
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"

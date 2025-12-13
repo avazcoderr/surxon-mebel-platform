@@ -25,4 +25,4 @@ jobs:
       - name: Run linter
         run: |
           cd surxon_backend
-          ruff check . --ignore=F401,F403,F405,F841
+          ruff check .

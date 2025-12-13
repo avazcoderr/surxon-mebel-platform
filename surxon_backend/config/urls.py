@@ -44,6 +44,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include('apps.authentication.urls')),
+    path("api/products/", include('apps.products.urls')),
+
+    # path("api/brands/", include('apps.brands.urls')),
     path("health/", health_check, name="health_check"),
 
     # Swagger and Redoc documentation URLs

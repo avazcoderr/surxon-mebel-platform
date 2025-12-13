@@ -92,7 +92,7 @@ class LogoutView(APIView):
             return Response({
                 'message': 'Logout successful'
             }, status=status.HTTP_200_OK)
-        except Exception as e:
+        except Exception:
             return Response({
                 'error': 'Invalid token'
             }, status=status.HTTP_400_BAD_REQUEST)
@@ -108,7 +108,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                 'message': 'Token refreshed successfully',
                 'tokens': response.data
             }, status=status.HTTP_200_OK)
-        except (InvalidToken, TokenError) as e:
+        except (InvalidToken, TokenError):
             return Response({
                 'error': 'Invalid refresh token'
             }, status=status.HTTP_401_UNAUTHORIZED)

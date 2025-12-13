@@ -1,0 +1,6 @@
+[tool.ruff]
+line-length = 88
+# Either replace ignore list:
+# ignore = ["F401"]
+# Or *extend* the default ignores (safer)
+extend-ignore = ["F401"]

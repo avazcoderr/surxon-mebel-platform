@@ -3,4 +3,4 @@ repos:
     rev: main
     hooks:
       - id: ruff
-        args: ["--fix"]
+        args: ["--fix", "--ignore=F401"]

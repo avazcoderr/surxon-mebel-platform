@@ -6,6 +6,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from django.contrib.auth import logout
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from .serializers import UserRegistrationSerializer, UserLoginSerializer, UserSerializer
 
@@ -13,6 +15,10 @@ from .serializers import UserRegistrationSerializer, UserLoginSerializer, UserSe
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     
+    @swagger_auto_schema(
+         request_body=UserRegistrationSerializer,
+         responses={201: UserSerializer, 400: 'Bad Request'}
+     )
     def post(self, request):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
@@ -37,6 +43,10 @@ class RegisterView(APIView):
 class LoginView(APIView):
     permission_classes = [AllowAny]
     
+    @swagger_auto_schema(
+         request_body=UserLoginSerializer,
+         responses={200: UserSerializer, 400: 'Bad Request'}
+     )
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -63,6 +73,12 @@ class LoginView(APIView):
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     
+    refresh_schema = openapi.Schema(
+         type=openapi.TYPE_OBJECT,
+         properties={'refresh': openapi.Schema(type=openapi.TYPE_STRING)}
+     )
+
+    @swagger_auto_schema(request_body=refresh_schema, responses={200: 'OK', 400: 'Bad Request'})
     def post(self, request):
         try:
             refresh_token = request.data.get('refresh')
@@ -76,7 +92,7 @@ class LogoutView(APIView):
             return Response({
                 'message': 'Logout successful'
             }, status=status.HTTP_200_OK)
-        except Exception as e:
+        except Exception:
             return Response({
                 'error': 'Invalid token'
             }, status=status.HTTP_400_BAD_REQUEST)
@@ -92,7 +108,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                 'message': 'Token refreshed successfully',
                 'tokens': response.data
             }, status=status.HTTP_200_OK)
-        except (InvalidToken, TokenError) as e:
+        except (InvalidToken, TokenError):
             return Response({
                 'error': 'Invalid refresh token'
             }, status=status.HTTP_401_UNAUTHORIZED)

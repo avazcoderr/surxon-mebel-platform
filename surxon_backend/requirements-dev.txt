@@ -1,11 +1,18 @@
 asgiref==3.11.0
+cfgv==3.5.0
+distlib==0.4.0
 Django==5.2.9
 django-cors-headers==4.9.0
 djangorestframework==3.16.1
 djangorestframework_simplejwt==5.5.1
 drf-yasg==1.21.11
+filelock==3.20.0
+identify==2.6.15
 inflection==0.5.1
+nodeenv==1.9.1
 packaging==25.0
+platformdirs==4.5.1
+pre_commit==4.5.0
 psycopg2-binary==2.9.11
 PyJWT==2.10.1
 pytz==2025.2
@@ -13,4 +20,5 @@ PyYAML==6.0.3
 sqlparse==0.5.4
 typing_extensions==4.15.0
 uritemplate==4.2.0
+virtualenv==20.35.4
 whitenoise==6.11.0

@@ -4,11 +4,3 @@ line-length = 88
 # ignore = ["F401"]
 # Or *extend* the default ignores (safer)
 extend-ignore = ["F401"]
-
-select = ["D"]
-
-ignore = [
-    "D100",  # module
-    "D104",  # package
-    "D105",  # magic methods
-]
